@@ -1,18 +1,19 @@
 var express=require('express');
 var router=express.Router();
+var db=require('../foo/db.js');
 
 var path = require('path');
 var fs = require('fs');
 var sanitizeHtml = require('sanitize-html');
 
 var template = require('../lib/template.js');
-var auth = require('../lib/auth.js');
+// var auth = require('../lib/auth.js');
 
 router.get('/create',function(request,response){
-  if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
-    response.send(`<script>alert('need login!');location.href='/'</script>`);
-    return false;
-  }
+  // if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
+  //   response.send(`<script>alert('need login!');location.href='/'</script>`);
+  //   return false;
+  // }
   var title = 'Create';
   var list = template.list(request.list);
   var html = template.HTML(title, list, `
@@ -27,16 +28,17 @@ router.get('/create',function(request,response){
     </form>
   `,
   `<p><h2>Create ...</h2></p>`,
-  auth.StatusUI(request,response)
+  `<p>authstatusui dummy data</p>`
+  // auth.StatusUI(request,response)
   );
   response.send(html);
 });
 
 router.post('/create_process',function(request,response){ //데이터전송시 post방식으로 전송하면, 받는쪽에서는 app.post로 받아야함.
-  if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
-    response.send(`<script>alert('need login!');location.href='/'</script>`);
-    return false;
-  }
+  // if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
+  //   response.send(`<script>alert('need login!');location.href='/'</script>`);
+  //   return false;
+  // }
   var post = request.body;
   var title = post.title;
   var description = post.description;
@@ -46,10 +48,10 @@ router.post('/create_process',function(request,response){ //데이터전송시 p
 });
 
 router.get('/update/:pageId',function(request,response){
-  if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
-    response.send(`<script>alert('need login!');location.href='/'</script>`);
-    return false;
-  }
+  // if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
+  //   response.send(`<script>alert('need login!');location.href='/'</script>`);
+  //   return false;
+  // }
   var filteredId = path.parse(request.params.pageId).base;
   fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
     var title = request.params.pageId;
@@ -68,18 +70,18 @@ router.get('/update/:pageId',function(request,response){
       </form>
       `,
       `<p><h2>Update ${title} ...</h2></p>`,
-      auth.StatusUI(request,response)
-
+      `<p>authstatusui dummy data</p>`
+       // auth.StatusUI(request,response)
     );
     response.send(html);
   });
 });
 
 router.post('/update_process',function(request,response){
-  if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
-    response.send(`<script>alert('need login!');location.href='/'</script>`);
-    return false;
-  }
+  // if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
+  //   response.send(`<script>alert('need login!');location.href='/'</script>`);
+  //   return false;
+  // }
   var post = request.body;
   var id = post.id;
   var title = post.title;
@@ -92,10 +94,10 @@ router.post('/update_process',function(request,response){
 });
 
 router.post('/delete_process',function(request,response){
-  if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
-    response.send(`<script>alert('need login!');location.href='/'</script>`);
-    return false;
-  }
+  // if(!auth.IsOwner(request,response)){//로그인이 안되어있으면 홈으로 보내버림(접근제어)
+  //   response.send(`<script>alert('need login!');location.href='/'</script>`);
+  //   return false;
+  // }
   var post = request.body;
   var id = post.id;
   var filteredId = path.parse(id).base;
@@ -111,24 +113,29 @@ router.get('/:pageId',function(request,response,next){
     if(err){
       next(err);
     } else{
-      var title = request.params.pageId;
-      var sanitizedTitle = sanitizeHtml(title);
-      var sanitizedDescription = sanitizeHtml(description, {
-        allowedTags:['h1']
+      // var title = request.params.pageId;
+      // var sanitizedTitle = sanitizeHtml(title);
+      // var sanitizedDescription = sanitizeHtml(description, {
+      //   allowedTags:['h1']
+      // });
+      // var list = template.list(request.list);
+      // var html = template.HTML(sanitizedTitle, list,
+      //   `<h2>${sanitizedTitle}</h2>${sanitizedDescription}`,
+      //   ` <a href="/topic/create">create</a>
+      //     <a href="/topic/update/${sanitizedTitle}">update</a>
+      //     <form action="/topic/delete_process" method="post">
+      //       <input type="hidden" name="id" value="${sanitizedTitle}">
+      //       <input type="submit" value="delete">
+      //     </form>
+      //   `,
+      //   `<p>authstatusui dummy data</p>`
+      //   // auth.StatusUI(request,response)
+      // );
+      // response.send(html);
+      response.render('topic',{
+        title:filteredId,
+        description:description
       });
-      var list = template.list(request.list);
-      var html = template.HTML(sanitizedTitle, list,
-        `<h2>${sanitizedTitle}</h2>${sanitizedDescription}`,
-        ` <a href="/topic/create">create</a>
-          <a href="/topic/update/${sanitizedTitle}">update</a>
-          <form action="/topic/delete_process" method="post">
-            <input type="hidden" name="id" value="${sanitizedTitle}">
-            <input type="submit" value="delete">
-          </form>
-        `,
-        auth.StatusUI(request,response)
-      );
-      response.send(html);
     }
   });
 });

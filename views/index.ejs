@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <title>MAIN</title>
+  <meta charset="utf-8">
+  <link rel='stylesheet' href='/css/style.css'>
+</head>
+<body>
+  <h1>
+    <a class="appbar" href="/">community</a>
+    <a class="appbarButton" href="/topic/create">글쓰기</a>
+  </h1>
+  <p class="container">
+    <ul>
+      <% for(var i=0;i<filelist.length;i++) { %>
+        <li><a href="/topic/<%=filelist[i]%>"><%=filelist[i]%></a></li>
+      <% } %>
+    </ul>
+  </p>
+</body>
+</html>

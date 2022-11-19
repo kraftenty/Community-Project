@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title><%=title%> - community</title>
+  <meta charset="utf-8">
+  <link rel='stylesheet' href='/css/style.css'>
+</head>
+<body>
+  <h1>
+    <a class="appbar" href="/">community</a>
+    <a class="appbarButton" href="/topic/create">글쓰기</a>
+    <a class="appbarButton" href="/topic/update/<%=title%>">수정</a>
+  </h1>
+  <p class="container">
+    <p class="title">
+      <%=title%>
+    </p>
+    <p class="description">
+      <%=description%>
+    </p>
+    <form action="/topic/delete_process" method="post">
+      <input type="hidden" name="id" value="${sanitizedTitle}">
+      <input class="deleteButton" type="submit" value="delete">
+    </form>
+  </p>
+</body>
+</html>
