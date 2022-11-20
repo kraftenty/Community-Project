@@ -16,13 +16,14 @@
   </header>
   <section>
     <p class="title">
-      <%=model.title%>
+      <%=model.title%> - <%=model.author%>
     </p>
     <p class="description">
       <%=model.description%>
     </p>
     <form action="/topic/delete_process" method="post">
       <input type="hidden" name="id" value="<%=model.id%>">
+      <input type="hidden" name="author" value="<%=model.author%>">
       <input class="deleteButton" type="submit" value="삭제">
     </form>
   </section>

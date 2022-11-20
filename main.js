@@ -1,7 +1,6 @@
 var express = require('express') // npm install express --save
 var app = express();
 
-const port = 3000
 
 var bodyParser = require('body-parser'); //npm install body-parser --save
 var compression=require('compression')
@@ -27,15 +26,10 @@ app.use(session({//세션 미들웨어
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-
-
-
-
-
-
 app.use('/',indexRouter);
 app.use('/topic',topicRouter);
 app.use('/auth',authRouter);
+
 
 app.use(function(request, response, next) {
   response.status(404).send('Sorry cant find that!');
@@ -46,7 +40,7 @@ app.use(function(err,req,res,next){
   res.status(500).send('Something Broke!');
 });
 
-
+const port = 3000;
 app.listen(port, function(){
   console.log(`Example app listening on port ${port}`);
 });

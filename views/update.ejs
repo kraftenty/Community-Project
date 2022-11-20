@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title><%=model.title%> - community</title>
+  <title><%=model.title%> - 수정 - community</title>
   <meta charset="utf-8">
   <link rel='stylesheet' href='/css/style.css'>
 </head>
@@ -15,6 +15,7 @@
   <section>
     <form action="/topic/update_process" method="post">
       <input type="hidden" name="id" value="<%=model.id%>">
+      <input type="hidden" name="author" value="<%=model.author%>">
       <p><input type="text" name="title" value="<%=model.title%>"></p>
       <p>
         <textarea name="description"><%=model.description%></textarea>

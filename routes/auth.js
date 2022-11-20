@@ -1,20 +1,17 @@
 var express=require('express');
 var router=express.Router();
+var user=require('../data/user.js');
 
-var authData={
-  name:'test',
-  password:'1234'
-}
 
 router.get('/login',function(req,res){
   res.render('login',{
   });
 });
-
+//req.body.name===authData.name && req.body.password===authData.password
 router.post('/login_process',function(req,res){
-  if(req.body.name===authData.name && req.body.password===authData.password){
+  if(user.IsPass(req.body.name, req.body.password)){
     req.session.is_logined = true;
-    req.session.name = authData.name;
+    req.session.name = req.body.name;
     req.session.save(function(){ //session객체의 데이터(is_logined,id 등)를 저장
       res.redirect(`/`);
     });

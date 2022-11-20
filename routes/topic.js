@@ -14,7 +14,12 @@ router.get('/create',function(req,res){
 });
 
 router.post('/create_process',function(req,res){ //데이터전송시 post방식으로 전송하면, 받는쪽에서는 app.post로 받아야함.
-  db.run(`INSERT INTO topic (title,description) VALUES('${req.body.title}','${req.body.description}')`,function(err){
+  if(req.body.title===''||req.body.description===''){
+    res.send(`<script>alert('내용이 빈 글을 작성할 수 없습니다.');location.href='/topic/create'</script>`);
+    return false;
+  }
+  console.log(auth.getName(req,res));
+  db.run(`INSERT INTO topic (title,description,author) VALUES('${req.body.title}','${req.body.description}','${auth.getName(req,res)}')`,function(err){
     if(err){
       return console.error(err.message);
     }
@@ -39,6 +44,14 @@ router.get('/update/:id',function(req,res){
 });
 
 router.post('/update_process',function(req,res){
+  if(req.body.title===''||req.body.description===''){
+    res.send(`<script>alert('내용이 빈 글을 작성할 수 없습니다.');location.href='/'</script>`);
+    return false;
+  }
+  if(auth.getName(req,res)!=req.body.author){
+    res.send(`<script>alert('다른 유저의 글을 수정할 수 없습니다.');location.href='/'</script>`);
+    return false;
+  }
   db.run(`UPDATE topic SET title='${req.body.title}', description='${req.body.description}' WHERE id=${req.body.id}`,function(err){
     if(err){
       return console.error(err.message);
@@ -50,6 +63,10 @@ router.post('/update_process',function(req,res){
 router.post('/delete_process',function(req,res){
   if(!auth.IsOwner(req,res)){//접근제어
     res.send(`<script>alert('로그인이 필요합니다');location.href='/'</script>`);
+    return false;
+  }
+  if(auth.getName(req,res)!=req.body.author){
+    res.send(`<script>alert('다른 유저의 글을 삭제할 수 없습니다.');location.href='/'</script>`);
     return false;
   }
   db.run(`DELETE FROM topic WHERE id=${req.body.id}`,function(err){
