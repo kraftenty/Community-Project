@@ -6,6 +6,15 @@ html,body{
   font-size: 100%;
   box-sizing: border-box;
 }
+header{
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+}
+section{
+  padding-top: 60px;
+}
 h1{
   margin: 0;
   padding: 10px;
@@ -17,12 +26,28 @@ a{
   color:black;
 }
 .appbar{
-  color:antiquewhite;
+  color:#fff;
 }
 .appbarButton{
   font-size: 0.5em;
-  color:antiquewhite;
+  color:#fff;
   margin-left:25px;
+}
+.loginSet{
+  padding-top: 18px;
+  padding-right: 5px;
+  font-size: 0.5em;
+  color:#fff;
+  margin-left:25px;
+  float:right;
+}
+h2{
+  margin-left: 15px;
+}
+ul{
+  padding-left: 10px;
+  padding-right: 10px;
+  list-style-type: none;
 }
 form{
   margin-left: 15px;
@@ -33,4 +58,12 @@ form{
 }
 .description{
   margin:10px;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  background-color: #aaa;
+  font-size: small;
+  text-align: center;
 }

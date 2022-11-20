@@ -6,12 +6,15 @@
   <link rel='stylesheet' href='/css/style.css'>
 </head>
 <body>
-  <h1>
-    <a class="appbar" href="/">community</a>
-    <a class="appbarButton" href="/topic/create">글쓰기</a>
-    <a class="appbarButton" href="/topic/update/<%=model.id%>">수정</a>
-  </h1>
-  <p class="container">
+  <header>
+    <h1>
+      <a class="appbar" href="/">community</a>
+      <a class="appbarButton" href="/topic/create">글쓰기</a>
+      <a class="appbarButton" href="/topic/update/<%=model.id%>">수정</a>
+      <%-auth%>
+    </h1>
+  </header>
+  <section>
     <p class="title">
       <%=model.title%>
     </p>
@@ -22,6 +25,9 @@
       <input type="hidden" name="id" value="<%=model.id%>">
       <input class="deleteButton" type="submit" value="삭제">
     </form>
-  </p>
+  </section>
+  <footer>
+    Community Service. Developed By kraftenty@gmail.com
+  </footer>
 </body>
 </html>

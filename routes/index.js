@@ -2,7 +2,7 @@ var express=require('express');
 var router=express.Router();
 var db=require('../data/db.js');
 
-// var auth = require('../lib/auth.js');
+var auth = require('../lib/auth.js');
 
 router.get('/',function(req,res){
   db.all(`SELECT * FROM topic`,function(err,topic){
@@ -10,7 +10,8 @@ router.get('/',function(req,res){
       return console.error(err.message);
     }
     res.render('index',{
-      model:topic
+      model:topic,
+      auth:auth.StatusUI(req,res)
     });
   });
 });
