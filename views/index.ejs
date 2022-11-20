@@ -12,8 +12,8 @@
   </h1>
   <p class="container">
     <ul>
-      <% for(var i=0;i<filelist.length;i++) { %>
-        <li><a href="/topic/<%=filelist[i]%>"><%=filelist[i]%></a></li>
+      <% for(var i=0;i<model.length;i++) { %>
+        <li><a href="/topic/<%=model[i].id%>"><%=model[i].title%></a></li>
       <% } %>
     </ul>
   </p>

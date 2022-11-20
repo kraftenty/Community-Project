@@ -24,8 +24,8 @@ a{
   color:antiquewhite;
   margin-left:25px;
 }
-.container{
-  margin-left: 25px;
+form{
+  margin-left: 15px;
 }
 .title{
   margin:10px;
@@ -33,7 +33,4 @@ a{
 }
 .description{
   margin:10px;
-}
-.deleteButton{
-  margin-left: 10px;
 }

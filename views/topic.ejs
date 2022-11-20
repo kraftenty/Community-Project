@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title><%=title%> - community</title>
+  <title><%=model.title%> - community</title>
   <meta charset="utf-8">
   <link rel='stylesheet' href='/css/style.css'>
 </head>
@@ -9,18 +9,18 @@
   <h1>
     <a class="appbar" href="/">community</a>
     <a class="appbarButton" href="/topic/create">글쓰기</a>
-    <a class="appbarButton" href="/topic/update/<%=title%>">수정</a>
+    <a class="appbarButton" href="/topic/update/<%=model.id%>">수정</a>
   </h1>
   <p class="container">
     <p class="title">
-      <%=title%>
+      <%=model.title%>
     </p>
     <p class="description">
-      <%=description%>
+      <%=model.description%>
     </p>
     <form action="/topic/delete_process" method="post">
-      <input type="hidden" name="id" value="${sanitizedTitle}">
-      <input class="deleteButton" type="submit" value="delete">
+      <input type="hidden" name="id" value="<%=model.id%>">
+      <input class="deleteButton" type="submit" value="삭제">
     </form>
   </p>
 </body>

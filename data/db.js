@@ -2,7 +2,7 @@
 
 const path=require('path');
 const sqlite3 = require("sqlite3").verbose();
-const db_name = path.join(__dirname, "topics.db");
+const db_name = path.join(__dirname, "topic.db");
 const db = new sqlite3.Database(db_name, function(err){
   if (err) {
     return console.error(err.message);

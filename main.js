@@ -3,7 +3,6 @@ var app = express();
 
 const port = 3000
 
-var fs = require('fs');
 var bodyParser = require('body-parser'); //npm install body-parser --save
 var compression=require('compression')
 
@@ -14,12 +13,6 @@ var authRouter=require('./routes/auth.js');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(compression());
-app.get('*',function(request,response,next){//사용자 지정 미들웨어
-  fs.readdir('./data', function(error, filelist){
-    request.list=filelist;
-    next();
-  });
-});
 // app.use(session({//세션 미들웨어
 //   secret: 'qwer1234',
 //   resave: false,

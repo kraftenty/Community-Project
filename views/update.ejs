@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <title><%=model.title%> - community</title>
+  <meta charset="utf-8">
+  <link rel='stylesheet' href='/css/style.css'>
+</head>
+<body>
+  <h1>
+    <a class="appbar" href="/">community</a>
+  </h1>
+  <p class="container">
+    <form action="/topic/update_process" method="post">
+      <input type="hidden" name="id" value="<%=model.id%>">
+      <p><input type="text" name="title" value="<%=model.title%>"></p>
+      <p>
+        <textarea name="description"><%=model.description%></textarea>
+      </p>
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+  </p>
+</body>
+</html>
