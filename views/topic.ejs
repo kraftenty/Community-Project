@@ -18,6 +18,7 @@
     <p class="title">
       <%=model.title%> - <%=model.author%>
     </p>
+    <hr>
     <p class="description">
       <%
         var desc=model.description;
@@ -26,11 +27,6 @@
       <%-desc%>
     </p>
     <%-deleteButton%>
-    <!-- <form action="/topic/delete_process" method="post">
-      <input type="hidden" name="id" value="<%=model.id%>">
-      <input type="hidden" name="author" value="<%=model.author%>">
-      <input class="deleteButton" type="submit" value="삭제">
-    </form> -->
   </section>
   <footer>
     Community Service. Developed By kraftenty@gmail.com
