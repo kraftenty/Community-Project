@@ -13,15 +13,16 @@
     </h1>
   </header>
   <section>
+    <h2>글 작성</h2> 
     <form action="/topic/create_process" method="post">
       <p>
-        <input type="text" name="title" placeholder="제목을 입력하세요" size="53">
+        <input class="titleInput" type="text" name="title" placeholder="제목을 입력하세요">
       </p>
       <p>
-        <textarea name="description" placeholder="내용을 입력하세요" style="width:400px;height: 500px;"></textarea>
+        <textarea name="description" placeholder="내용을 입력하세요"></textarea>
       </p>
       <p>
-        <input type="submit" value='create'>
+        <input type="submit" value='게시'>
       </p>
     </form>
   </section>

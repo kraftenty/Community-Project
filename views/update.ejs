@@ -13,15 +13,16 @@
     </h1>
   </header>
   <section>
+    <h2>글 수정</h2> 
     <form action="/topic/update_process" method="post">
       <input type="hidden" name="id" value="<%=model.id%>">
       <input type="hidden" name="author" value="<%=model.author%>">
-      <p><input type="text" name="title" value="<%=model.title%>"></p>
+      <p><input class="titleInput" type="text" name="title"value="<%=model.title%>"></p>
       <p>
         <textarea name="description"><%=model.description%></textarea>
       </p>
       <p>
-        <input type="submit">
+        <input type="submit" value="게시">
       </p>
     </form>
   </section>

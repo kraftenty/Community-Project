@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>회원가입 - community</title>
+  <meta charset="utf-8">
+  <link rel='stylesheet' href='/css/style.css'>
+</head>
+<body>
+  <header>
+    <h1>
+      <a class="appbar" href="/">community</a>
+    </h1>
+  </header>
+  <section>
+    <h2>회원가입</h2>
+    <form action="/auth/register_process" method="post">
+      <p>커뮤니티에 오신 것을 환영합니다.</p><br>
+      <p>사용할 이름을 입력하세요.</p>
+      <p><input type="text" name="name" placeholder="이름"></p>
+      <p>사용할 비밀번호를 입력하세요.</p>
+      <p><input type="password" name="password" placeholder="비밀번호"></p>
+      <p>사용할 비밀번호를 한번 더 입력하세요.</p>
+      <p><input type="password" name="password2" placeholder="비밀번호"></p>
+      <p><input type="submit" value='가입하기'></p>
+    </form>
+  </section>
+  <footer>
+    Community Service. Developed By kraftenty@gmail.com
+  </footer>
+</body>
+</html>

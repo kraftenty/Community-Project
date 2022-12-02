@@ -48,10 +48,6 @@ router.post('/update_process',function(req,res){
     res.send(`<script>alert('내용이 빈 글을 작성할 수 없습니다.');location.href='/'</script>`);
     return false;
   }
-  if(auth.getName(req,res)!=req.body.author){
-    res.send(`<script>alert('다른 유저의 글을 수정할 수 없습니다.');location.href='/'</script>`);
-    return false;
-  }
   db.run(`UPDATE topic SET title='${req.body.title}', description='${req.body.description}' WHERE id=${req.body.id}`,function(err){
     if(err){
       return console.error(err.message);
@@ -63,10 +59,6 @@ router.post('/update_process',function(req,res){
 router.post('/delete_process',function(req,res){
   if(!auth.IsOwner(req,res)){//접근제어
     res.send(`<script>alert('로그인이 필요합니다');location.href='/'</script>`);
-    return false;
-  }
-  if(auth.getName(req,res)!=req.body.author){
-    res.send(`<script>alert('다른 유저의 글을 삭제할 수 없습니다.');location.href='/'</script>`);
     return false;
   }
   db.run(`DELETE FROM topic WHERE id=${req.body.id}`,function(err){
@@ -84,7 +76,9 @@ router.get('/:id',function(req,res){
     }
     res.render('topic',{
       model:topic,
-      auth:auth.StatusUI(req,res)
+      auth:auth.StatusUI(req,res),
+      updateButton:auth.UpdateButtonUI(req,res,req.params.id,topic.author),
+      deleteButton:auth.DeleteButtonUI(req,res,req.params.id,topic.author)
     });
   });
 });
